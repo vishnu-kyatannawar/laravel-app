@@ -22,7 +22,15 @@ return [
     // Thus, both first-party and third-party code being used by
     // your application should be included in this list.
     'directory_list' => [
-        '.',
+        'app',
+        'config',
+        'database',
+        'public',
+        'resources',
+        'routes',
+        'storage',
+        'tests',
+        'bootstrap',
         'vendor/symfony/console',
     ],
 
@@ -68,4 +76,24 @@ return [
         'EmptyStatementListPlugin',
         'LoopVariableReusePlugin',
     ],
+    'suppress_issue_types' => [
+		// The following two have been added to not highlight issues
+		// raised due to variables added for interface methods that are
+		// then not used by the interface implementation
+		'PhanUnusedPublicMethodParameter',
+		'PhanUnusedProtectedMethodParameter',
+		'PhanUnusedPrivateMethodParameter',
+		// Allow unused values in foreach
+		'PhanUnusedVariableValueOfForeachWithKey',
+		// FIXME: This should be fixed and removed, we should not swallow
+		// exception or handle specific exceptions.
+		'PhanUnusedVariableCaughtException'
+	],
+	// Backwards Compatibility Checking
+	// (Disable this if the application no longer supports php 5,
+	// or use a different tool.
+	// Phan's checks are currently slow)
+	// Set it to false or omit it.
+	'backward_compatibility_checks' => false,
+	'unused_variable_detection' => true
 ];
